@@ -1,5 +1,4 @@
 import { draggable } from '@atlaskit/pragmatic-drag-and-drop/element/adapter';
-import { elementAdapterNativeDataKey } from '@atlaskit/pragmatic-drag-and-drop/element/element-adapter-native-data-key';
 import moment from 'moment';
 import Link from 'next/link';
 import { KanbanColumn, UISettings } from '../../types/tickets';
@@ -33,14 +32,10 @@ export default function TicketKanban({ columns, uiSettings }: TicketKanbanProps)
                   key={ticket.id}
                   ref={(element) => {
                     if (!element) return;
-                    const element2 = element;
                     draggable({
-                      element: element2,
-                      dragHandle: element2
+                      element,
+                      dragHandle: element
                     });
-                    
-                    // Set the data transfer data
-                    element2.setAttribute('data-ticket-id', ticket.id.toString());
                   }}
                   className="bg-white dark:bg-gray-900 rounded-lg shadow-sm border dark:border-gray-700 p-3 cursor-move hover:shadow-md transition-shadow"
                 >
@@ -98,4 +93,4 @@ export default function TicketKanban({ columns, uiSettings }: TicketKanbanProps)
       </div>
     </div>
   );
-}
+} 
