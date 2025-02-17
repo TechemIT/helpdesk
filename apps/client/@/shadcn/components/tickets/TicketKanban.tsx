@@ -8,6 +8,10 @@ interface TicketKanbanProps {
   uiSettings: UISettings;
 }
 
+type DragData = {
+  ticketId: string;
+};
+
 export default function TicketKanban({ columns, uiSettings }: TicketKanbanProps) {
   return (
     <div className="flex-1 min-w-0 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
@@ -32,10 +36,10 @@ export default function TicketKanban({ columns, uiSettings }: TicketKanbanProps)
                   key={ticket.id}
                   ref={(element) => {
                     if (!element) return;
-                    draggable({
+                    draggable<DragData>({
                       element,
                       dragHandle: element,
-                      data: { ticketId: ticket.id } as const,
+                      data: { ticketId: ticket.id },
                     });
                   }}
                   className="bg-white dark:bg-gray-900 rounded-lg shadow-sm border dark:border-gray-700 p-3 cursor-move hover:shadow-md transition-shadow"
@@ -94,4 +98,4 @@ export default function TicketKanban({ columns, uiSettings }: TicketKanbanProps)
       </div>
     </div>
   );
-} 
+}
