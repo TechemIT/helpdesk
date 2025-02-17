@@ -8,11 +8,16 @@ interface TicketKanbanProps {
   uiSettings: UISettings;
 }
 
-type DragData = {
-  ticketId: string;
-};
-
 export default function TicketKanban({ columns, uiSettings }: TicketKanbanProps) {
+  const setupDraggable = (element: HTMLElement | null, ticketId: string) => {
+    if (!element) return;
+    draggable({
+      element,
+      dragHandle: element,
+      data: { ticketId }
+    });
+  };
+
   return (
     <div className="flex-1 min-w-0 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
       <div className="flex gap-4 p-4 min-w-fit max-w-[calc(100vw-2rem)]">
@@ -34,14 +39,7 @@ export default function TicketKanban({ columns, uiSettings }: TicketKanbanProps)
               {column.tickets.map((ticket) => (
                 <div
                   key={ticket.id}
-                  ref={(element) => {
-                    if (!element) return;
-                    draggable<DragData>({
-                      element,
-                      dragHandle: element,
-                      data: { ticketId: ticket.id },
-                    });
-                  }}
+                  ref={(element) => setupDraggable(element, ticket.id)}
                   className="bg-white dark:bg-gray-900 rounded-lg shadow-sm border dark:border-gray-700 p-3 cursor-move hover:shadow-md transition-shadow"
                 >
                   <div className="flex flex-col gap-2 min-w-0">
