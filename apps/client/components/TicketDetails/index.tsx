@@ -764,6 +764,22 @@ export default function Ticket() {
                       </div>
                       <div className="mt-2 text-xs flex flex-row justify-between items-center space-x-1">
                         <div className="flex flex-row space-x-1 items-center">
+                          {/* Nome del ticket */}
+                          {data.ticket.name && (
+                            <div>
+                              <span className="inline-flex items-center rounded-md bg-purple-50 px-2 py-1 text-xs font-medium text-purple-700 ring-1 ring-inset ring-purple-600/20">
+                                {data.ticket.name}
+                              </span>
+                            </div>
+                          )}
+                          {/* Email del ticket */}
+                          {data.ticket.email && (
+                            <div>
+                              <span className="inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-xs font-medium text-indigo-700 ring-1 ring-inset ring-indigo-600/20">
+                                {data.ticket.email}
+                              </span>
+                            </div>
+                          )}
                           {data.ticket.client && (
                             <div>
                               <span className="inline-flex items-center rounded-md bg-orange-50 px-2 py-1 text-xs font-medium text-orange-700 ring-1 ring-inset ring-orange-600/20">
